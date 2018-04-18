@@ -8,8 +8,10 @@ var fonts = {
 };
 
 var PdfPrinter = require('../src/printer');
+var loggify = require('./pdfdoc-loggify')
 var printer = new PdfPrinter(fonts);
 var fs = require('fs');
+var PdfKit = require('pdfkit');
 
 var docDefinition = {
 	content: [
@@ -18,6 +20,10 @@ var docDefinition = {
 	]
 };
 
+loggify(PdfKit.prototype);
 var pdfDoc = printer.createPdfKitDocument(docDefinition);
+
 pdfDoc.pipe(fs.createWriteStream('pdfs/basics.pdf'));
 pdfDoc.end();
+
+pdfDoc.saveCommands('basics')

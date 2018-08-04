@@ -51,13 +51,19 @@ function loggify(doc) {
     doc[method] = new Proxy(fn, handler);
   })
 
-  doc.saveCommands = function (fileName) {
+  doc.saveCommands = function (fileName, {images} = {images: {}}) {
 
     var commands = this.__pkCommands
     var lines = []
 
+
     commands.forEach(command => {
-      var line = `doc.${command.name}(${getArgList(command.args)});`
+      var line
+      if (command.name === 'image') {
+        line = `doc.${command.name}(images[${valueToStr(command.args[0])}], ${getArgList(command.args.slice(1))});`
+      } else {
+        line = `doc.${command.name}(${getArgList(command.args)});`
+      }      
       lines.push(line)
     })
 
@@ -65,7 +71,7 @@ function loggify(doc) {
 
       `${fileName}-commands.json`,
 
-      JSON.stringify(commands),
+      JSON.stringify(commands, null, 2),
 
       function (err) {
         if (err) {
@@ -78,7 +84,10 @@ function loggify(doc) {
 
       `${fileName}-commands.js`,
 
-      lines.join('\n'),
+      `const images = ${valueToStr(images)}
+
+${lines.join('\n')}
+      `,
 
       function (err) {
         if (err) {

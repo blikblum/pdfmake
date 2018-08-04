@@ -10,6 +10,8 @@ var fonts = {
 var PdfPrinter = require('../src/printer');
 var printer = new PdfPrinter(fonts);
 var fs = require('fs');
+var loggify = require('./pdfdoc-loggify')
+var PdfKit = require('pdfkit');
 
 var docDefinition = {
 	background: function (page) {
@@ -38,6 +40,8 @@ var docDefinition = {
 	}
 };
 
+loggify(PdfKit.prototype);
 var pdfDoc = printer.createPdfKitDocument(docDefinition);
 pdfDoc.pipe(fs.createWriteStream('pdfs/background.pdf'));
 pdfDoc.end();
+pdfDoc.saveCommands('background', {images: docDefinition.images})

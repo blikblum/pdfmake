@@ -1,4 +1,6 @@
 var path = require("path");
+var loggify = require('./pdfdoc-loggify')
+var PdfKit = require('pdfkit');
 
 function mp(relFontPath) {
 	return path.resolve(__dirname, relFontPath)
@@ -49,6 +51,9 @@ var docDefinition = {
 	]
 }
 
+
+loggify(PdfKit.prototype);
 var pdfDoc = printer.createPdfKitDocument(docDefinition);
 pdfDoc.pipe(fs.createWriteStream(mp('./pdfs/qrCode.pdf')));
 pdfDoc.end();
+pdfDoc.saveCommands('qrcode')

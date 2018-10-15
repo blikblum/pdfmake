@@ -10,6 +10,8 @@ var fonts = {
 var PdfPrinter = require('../src/printer');
 var printer = new PdfPrinter(fonts);
 var fs = require('fs');
+var loggify = require('./pdfdoc-loggify')
+var PdfKit = require('pdfkit');
 
 
 var docDefinition = {
@@ -76,8 +78,11 @@ var docDefinition = {
 };
 
 var now = new Date();
+
+loggify(PdfKit.prototype);
 var pdfDoc = printer.createPdfKitDocument(docDefinition);
 pdfDoc.pipe(fs.createWriteStream('pdfs/toc.pdf'));
 pdfDoc.end();
+pdfDoc.saveCommands('toc');
 
 console.log(new Date() - now);

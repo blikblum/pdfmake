@@ -10,7 +10,8 @@ var fonts = {
 var PdfPrinter = require('../src/printer');
 var printer = new PdfPrinter(fonts);
 var fs = require('fs');
-
+var loggify = require('./pdfdoc-loggify')
+var PdfKit = require('pdfkit');
 
 var docDefinition = {
 	content: [
@@ -87,9 +88,13 @@ var docDefinition = {
 	}
 };
 
+
+
+loggify(PdfKit.prototype);
 var now = new Date();
 var pdfDoc = printer.createPdfKitDocument(docDefinition);
 pdfDoc.pipe(fs.createWriteStream('pdfs/pageReference.pdf'));
 pdfDoc.end();
+pdfDoc.saveCommands('pagereference');
 
 console.log(new Date() - now);

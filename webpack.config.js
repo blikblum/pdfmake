@@ -58,7 +58,12 @@ module.exports = {
 								"@babel/preset-env",
 								{
 									targets: {
-										"ie": "10"
+										browsers: [
+                      "Firefox 57",
+                      "Chrome 60",
+                      "iOS 10",
+                      "Safari 10"
+                    ]
 									},
 									modules: false,
 									useBuiltIns: 'usage',

@@ -22,8 +22,9 @@ module.exports = {
 	resolve: {
 		alias: {
       fs: path.join(__dirname, './src/browser-extensions/virtual-fs.js'),
-      pdfkit: 'pdfkit/js/pdfkit.esnext.js',
+      pdfkit: 'pdfkit-next/js/pdfkit.esnext.js',
       fontkit: 'fontkit-lite',
+      'fontkit-next': 'fontkit-lite',
       'iconv-lite': path.join(__dirname, './src/browser-extensions/dummyIconvLite.js')
 		}
 	},

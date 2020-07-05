@@ -24,6 +24,7 @@ module.exports = {
       fs: path.join(__dirname, './src/browser-extensions/virtual-fs.js'),
       pdfkit: 'pdfkit-next/js/pdfkit.esnext.js',
       fontkit: 'fontkit-lite',
+      linebreak: 'linebreak-next',
       'fontkit-next': 'fontkit-lite',
       'iconv-lite': path.join(__dirname, './src/browser-extensions/dummyIconvLite.js')
 		}
@@ -102,10 +103,6 @@ module.exports = {
 					]
 				})
 			},
-
-			{enforce: 'post', test: /fontkit-lite[/\\]index.js$/, loader: "transform-loader?brfs"},
-			{enforce: 'post', test: /unicode-properties[/\\]index.js$/, loader: "transform-loader?brfs"},
-			{enforce: 'post', test: /linebreak[/\\]src[/\\]linebreaker.js/, loader: "transform-loader?brfs"}
 		]
 	},
 	optimization: {

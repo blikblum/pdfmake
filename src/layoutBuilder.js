@@ -198,7 +198,8 @@ LayoutBuilder.prototype.addDynamicRepeatable = function (nodeGetter, sizeFunctio
 	for (var pageIndex = 0, l = pages.length; pageIndex < l; pageIndex++) {
 		this.writer.context().page = pageIndex;
 
-		var node = nodeGetter(pageIndex + 1, l, this.writer.context().pages[pageIndex].pageSize);
+		var pageInfo = pages[pageIndex]; 
+		var node = nodeGetter(pageIndex + 1, l, Object.assign({}, pageInfo, { metadata:  pageInfo.metadata }));
 
 		if (node) {
 			var sizes = sizeFunction(this.writer.context().getCurrentPage().pageSize, this.pageMargins);
@@ -370,6 +371,10 @@ LayoutBuilder.prototype.processNode = function (node) {
 
 	this.linearNodeList.push(node);
 	decorateNode(node);
+
+	if (typeof node.pageMetadata !== 'undefined') {
+		this.writer.context().setPageMetadata(node.pageMetadata);
+	}
 
 	applyMargins(function () {
 		var unbreakable = node.unbreakable;

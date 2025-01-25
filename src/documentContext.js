@@ -25,6 +25,8 @@ function DocumentContext(pageSize, pageMargins) {
 
 	this.backgroundLength = [];
 
+	this.metadata = undefined;
+
 	this.addPage(pageSize);
 }
 
@@ -255,7 +257,7 @@ DocumentContext.prototype.moveToNextPage = function (pageOrientation) {
 
 
 DocumentContext.prototype.addPage = function (pageSize) {
-	var page = { items: [], pageSize: pageSize };
+	var page = { items: [], pageSize: pageSize, metadata: this.metadata };
 	this.pages.push(page);
 	this.backgroundLength.push(0);
 	this.page = this.pages.length - 1;
@@ -272,6 +274,14 @@ DocumentContext.prototype.getCurrentPage = function () {
 	}
 
 	return this.pages[this.page];
+};
+
+DocumentContext.prototype.setPageMetadata = function (metadata) {
+	this.metadata = metadata;
+	var currentPage = this.pages[this.page];
+	if (currentPage) {
+		currentPage.metadata = metadata;
+	}	
 };
 
 DocumentContext.prototype.getCurrentPosition = function () {

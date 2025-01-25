@@ -47,10 +47,7 @@
     "test": "gulp",
     "playground": "node dev-playground/server.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/bpampuch/pdfmake.git"
-  },
+  "repository": "https://github.com/blikblum/pdfmake/tree/lite",
   "keywords": [
     "pdf",
     "javascript",
@@ -60,9 +57,9 @@
   "author": "Bartek Pampuch <bartosz.pampuch@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/bpampuch/pdfmake/issues"
+    "url": "https://github.com/blikblum/pdfmake/issues"
   },
-  "homepage": "http://pdfmake.org",
+  "homepage": "https://github.com/blikblum/pdfmake/tree/lite",
   "config": {
     "blanket": {
       "pattern": "src",

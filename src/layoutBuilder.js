@@ -199,7 +199,7 @@ LayoutBuilder.prototype.addDynamicRepeatable = function (nodeGetter, sizeFunctio
 		this.writer.context().page = pageIndex;
 
 		var pageInfo = pages[pageIndex]; 
-		var node = nodeGetter(pageIndex + 1, l, Object.assign({}, pageInfo, { metadata:  pageInfo.metadata }));
+		var node = nodeGetter(pageIndex + 1, l, Object.assign({}, pageInfo.pageSize, { metadata:  pageInfo.metadata }));
 
 		if (node) {
 			var sizes = sizeFunction(this.writer.context().getCurrentPage().pageSize, this.pageMargins);

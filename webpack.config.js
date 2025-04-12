@@ -62,10 +62,9 @@ module.exports = {
 								{
 									targets: {
 										browsers: [
-                      "Firefox 57",
-                      "Chrome 60",
-                      "iOS 10",
-                      "Safari 10"
+                      "Firefox 100",
+                      "Chrome 100",
+                      "iOS 13"
                     ]
 									},
 									modules: false,

@@ -2,7 +2,6 @@
 
 var isFunction = require('../helpers').isFunction;
 var isUndefined = require('../helpers').isUndefined;
-var isNull = require('../helpers').isNull;
 var FileSaver = require('file-saver');
 var saveAs = FileSaver.saveAs;
 
@@ -274,9 +273,9 @@ module.exports = {
 		}
 		return new Document(
 			docDefinition,
-			tableLayouts || global.pdfMake.tableLayouts,
-			fonts || global.pdfMake.fonts,
-			vfs || global.pdfMake.vfs
+			tableLayouts || this.tableLayouts,
+			fonts || this.fonts,
+			vfs || this.vfs
 		);
 	}
 };
